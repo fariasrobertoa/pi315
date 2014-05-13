@@ -1,4 +1,4 @@
-package aspects;
+package ajmu;
 
 import java.awt.event.ActionEvent;
 
@@ -11,7 +11,7 @@ public aspect TareaAPPConnect extends TareaConnect{
 	before(): inicializacion(){
 		if (!iniciada) {
 			iniciada	= true;
-			miTarea = new Tarea("Nombre de la Tarea que será evaluada", iniciada);			
+			miTarea = new Tarea("Nombre de la Tarea: CREAR y SALVAR MAPA", iniciada);			
 		}
 	}
 	
