@@ -2,6 +2,12 @@ package aspects;
 
 import java.rmi.server.ObjID;
 
+/**
+* @class Tarea
+* @description Cada objeto de la clase representará una tarea asignada al usuario, que permitirá medir su usabilidad.
+* Cada atributo contiene información para identificar la tarea unívocamente y para guardar los resultaos de las mediciones
+* de usabilidad que se han realizado
+*/
 public class Tarea {
 	//private long id;
 	private ObjID id;
