@@ -1,0 +1,74 @@
+%\documentclass{llncs}
+\documentclass[spanish]{llncs}
+%\usepackage{makeidx}
+%\usepackage{amsfonts}
+%\usepackage{amsmath}
+\usepackage[dvips]{graphicx}
+%\usepackage{setspace}
+%\usepackage{verbatim}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage{babel}
+
+\begin{document}
+
+\title{Un Framework Aspectual para la Evaluación Automática de Usabilidad de Tareas
+\thanks{Este trabajo fue apoyado por el proyecto PIA315/1 y parcialmente financiado por UNPA, Sta. Cruz, Arg.}}
+
+\titlerunning{Un Framework Aspectual para la Evaluación Automática de Usabilidad de Tareas}
+% abbreviated title (for running head) also used for the TOC unless
+% \toctitle is used
+
+\author{
+Natalia Trejo , 
+ Roberto Farias Y
+ Sandra Casas    
+}
+
+\authorrunning{N. Trejo et al.}   % abbreviated author list (for running head)
+
+% modified list of authors for the TOC (add the affiliations)
+
+\tocauthor{
+ Natalia Trejo (UARG - ITA),
+ Roberto Farias  (UNPA - ITA),
+ Sandra Casas (UARG - ITA)
+}
+
+
+\institute{
+ Instituto de Tecnolog\'ia  Aplicada\\
+ Universidad Nacional de la Patagonia Austral \\
+ \email{ nbtrejo@gmail.com,fariasrobertoa@unpa.edu.ar, sicasas@yahoo.com} \\
+} 
+
+
+\maketitle
+
+%-------------------------------------------------------------------------------
+
+\begin{abstract}
+La programación orientada a aspectos permite automatizar varias actividades de la evaluación de la usabilidad, en forma dinámica, transparente para el usuario y separada del código de las aplicaciones. A diferencia de otras propuestas, que se han centrado en pruebas que recolectan datos de bajo nivel de abstracción, este trabajo presenta un framework que permite realizar la evaluación de la usabilidad en aplicaciones de escritorio en el contexto de tareas de usuario. El framework consiste en un conjunto de módulos, aspectos y clases, que interactúan y se relacionan de manera tal de ser altamente reusable y sus requerimientos de especialización (configuración) son mínimos. 
+\end{abstract}
+{\em keywords:} usabilidad, framework, programación orientada a aspectos, AspectJ
+
+\input{secciones/intro.tex}
+
+\input{secciones/eval_usabilidad.tex}
+
+\input{secciones/framework_aspectual.tex}
+
+\input{secciones/casos_de_estudio.tex}
+
+\input{secciones/trabajos_relacionados.tex}
+
+\input{secciones/conclusiones.tex}
+
+%-------------------------------------------------------------------------------
+\bibliographystyle{splncs03}
+\bibliography{bib}
+
+\end{document}
