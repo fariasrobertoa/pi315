@@ -2,7 +2,6 @@
 \label{sec:casos_de_estudio}
  
  El desarrollo iterativo del framework implicó la ejecución de pruebas con cada versión del framework obtenida. El mismo ha sido probado y validado empleando dos aplicaciones de escritorio JMoney (http://jmoney.sourceforge.net/) y Freemind (http://freemind.sourceforge.net/). 
- 
 %\begin{description}
 %
 %\item[JMoney]
@@ -13,15 +12,11 @@
 %
 %%Es una herramienta para la creación de mapas mentales. Tiene 50 paquetes, 820 clases, 6974 métodos, 2816 atributos. Se compone de 108.378 líneas de código. 
 %\end{description}
-
-Para cada una se crearon diversas tareas y en cada iteración se configuró el framework. Los principales objetivos de las pruebas fueron constatar que el registro de los datos y cálculo de las métricas funcionaba correctamente; y comprobar el nivel de reúso, configuración y especialización. A continuación se presenta una tarea para cada caso de estudio, el aspecto que fue adaptado  y el resultado de las pruebas.
-
+Para cada una se crearon diversas tareas y en cada iteración se configuró el framework. Los principales objetivos de las pruebas fueron constatar que el registro de los datos y cálculo de las métricas funcionaba correctamente; y comprobar el nivel de reúso, configuración y especialización. A continuación se presenta una tarea para cada caso de estudio, el aspecto que fue adaptado  y el resultado de las pruebas (Fig.~\ref{fig:fig4} y Fig.~\ref{fig:fig5}).
 
 \begin{description}
-
 \item[Freemind]
 Tarea: Crear Mapa Mental Básico.
-
 	\begin{enumerate}
 		\item Crear un nuevo mapa, haciendo clic en el botón "Nuevo" desde la barra de herramientas, o desde el menú Archivo. 
 		\item Completar el texto del nodo raíz del mapa creado.
@@ -34,7 +29,7 @@ Tarea: Crear Mapa Mental Básico.
 %		\item Fin de la tarea: La tarea se considerará finalizada luego que el usuario guarda, por primera vez, el mapa en un archivo con el nombre solicitado. 
 %	\end{itemize}
 	\begin{verbatim}
-	public aspect FreemindTask1extends TaskConnect{
+	public aspect FreemindTask1 extends TaskConnect{
 	 private String idTask="Crear Mapa Conceptual Básico”;
 	 pointcut startTask():execution(void  
 	 freemind.modes.common.actions.NewMapAction.	\\
@@ -46,7 +41,7 @@ Tarea: Crear Mapa Mental Básico.
 	}
 	\end{verbatim}
 	%insertar fig4.png
-	\begin{figure*}[ht!]
+	\begin{figure*}[ht]
 		\centering
 		\includegraphics[scale=1]{figs/fig4.png}
 		\caption{\label{fig:fig4} Log de Tarea: Crear Mapa Conceptual Básico.}
@@ -54,16 +49,14 @@ Tarea: Crear Mapa Mental Básico.
 
 \item[JMoney]
 Tarea: Crear una nueva cuenta
-
 	\begin{enumerate}
 		\item Hacer click en el botón derecho del panel lateral y seleccionar la opción "new account".
 		\item Ingresar las propiedades de la cuenta desde el panel properties de la cuenta
 		\item Ingresar entradas en la cuenta desde el panel entries  
 		\item Salvar desde el botón "save" en la barra de herramientas o desde menú "file/save", usando combinación de teclas "ctrl+s" o respondiendo afirmativamente al mensaje de grabar los cambios antes de cerrar la aplicación.
 	\end{enumerate}
-
 	\begin{verbatim}
-		public aspect Tarea1JMoneyConnect extends TareaConnect{		
+		public aspect JMoneyTask1Connect extends TaskConnect{		
 		     private String idTask=”Crear Nueva Nuenta”;
 		     pointcut starTask():execution(void   
 		                  net.sf.jmoney.gui.MainFrame.newAccount());
@@ -72,12 +65,10 @@ Tarea: Crear una nueva cuenta
 		       execution(void net.sf.jmoney.gui.MainFrame.saveSessionAs());
 	}
 	\end{verbatim}
-
 	%insertar fig5.png
 	\begin{figure*}[ht!]
 		\centering
 		\includegraphics[scale=1]{figs/fig5.png}
 		\caption{\label{fig:fig5} Log de Tarea: Crear Nueva Cuenta.}
 	\end{figure*}
-	
 \end{description}
