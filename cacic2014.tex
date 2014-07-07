@@ -18,9 +18,11 @@
 \usepackage[utf8]{inputenc}
 %\usepackage{babel}
 \usepackage[pdftex]{hyperref}% hyperlinks de ref y cite
+\widowpenalty=10000
+\clubpenalty=10000
 
    
-\begin{document}\hyphenation{re-gis-tro de-sa-rro-llo va-rios e-va-lua-dor des-com-pon-ne a-tri-bu-tos re-que-ri-mien-tos} 
+\begin{document}\hyphenation{re-gis-tro de-sa-rro-llo va-rios e-va-lua-dor des-com-pon-ne a-tri-bu-tos re-que-ri-mien-tos ins-tan-cia-da} 
 
 \title{Un Framework Aspectual para la Evaluación de Usabilidad Automática de Tareas
 \thanks{Este trabajo fue apoyado por el proyecto PIA315/1 y parcialmente financiado por UNPA, Sta. Cruz, Arg.}}
@@ -52,9 +54,8 @@ Roberto Farias,
  \email{ fariasrobertoa@gmail.com,nbtrejo@gmail.com,sicasas@yahoo.com} \\
 } 
 
-
 \maketitle
-
+\newcommand{\squeezeup}{\vspace{-2.5mm}}
 %-------------------------------------------------------------------------------
 
 \begin{abstract}
@@ -70,7 +71,7 @@ La programación orientada a aspectos permite automatizar varias actividades de 
 
 \input{secciones/casos_de_estudio.tex}
 
-\input{secciones/trabajos_relacionados.tex}
+%\input{secciones/trabajos_relacionados.tex}
 
 \input{secciones/conclusiones.tex}
 
