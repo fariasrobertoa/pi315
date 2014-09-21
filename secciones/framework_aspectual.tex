@@ -26,21 +26,21 @@ A partir del planteo de un escenario general y abstracto se ha procedido a ident
 \centering
 \caption{Eventos-Acciones-Módulos}
 \label{tab:tab1}
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\multicolumn{2}{|c|}{Evento}                                                                                            & \multicolumn{2}{c|}{Acciones/Responsabilidad}                                              & \multicolumn{1}{c|}{Módulo} \\ \hline
+\begin{tabular}{l|l|l|l|l}
+\noalign{\hrule height 2pt}
+\multicolumn{2}{c|}{Evento}                                                                                            & \multicolumn{2}{c|}{Acciones/Responsabilidad}                                              & \multicolumn{1}{c}{Módulo} \\ \hline
 \multirow{2}{*}{E1} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Ejecución del \\ inicio de una tarea (D)\end{tabular}} & A1  & Interceptar inicio de una tarea                                                      & \multirow{2}{*}{Aspecto}    \\ \cline{3-4}
                     &                                                                                                   & A2  & Instanciar una tarea                                                                 &                             \\ \hline
-\multirow{2}{*}{E2} & \multirow{2}{*}{Instanciar Tarea (F)}                                                             & A3  & Registrar inicio de la tarea                                                         & Clase                       \\ \cline{3-5} 
+\multirow{2}{*}{E2} & \multirow{2}{*}{Instanciación de Tarea (F)}                                                             & A3  & Registrar inicio de la tarea                                                         & Clase                       \\ \cline{3-5} 
                     &                                                                                                   & A4  & Logging inicio de la tarea                                                           & Aspecto                     \\ \hline
 \multirow{2}{*}{E3} & \multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Ejecución del \\ fin de una tarea (D)\end{tabular}}    & A5  & Interceptar el fin de una tarea                                                      & \multirow{2}{*}{Aspecto}    \\ \cline{3-4}
                     &                                                                                                   & A6  & Ordenar el fin de la tarea                                                           &                             \\ \hline
-\multirow{3}{*}{E4} & \multirow{3}{*}{Se produce un error (D)}                                                          & A7 & Identificar el error                                                                  & \multirow{2}{*}{Aspecto}    \\ \cline{3-4} 
+\multirow{3}{*}{E4} & \multirow{3}{*}{Ocurrencia de error (D)}                                                          & A7 & Identificar el error                                                                  & \multirow{2}{*}{Aspecto}    \\ \cline{3-4} 
                     &                                                                                                   & A8 & Logging errores									     &  	   		   \\ \cline{3-5}
                     &                                                                                                   & A9 & Contabilizar error                                                                    & Clase                       \\ \hline
-\multirow{3}{*}{E5} & \multirow{3}{*}{Finalizar la tarea (F)}                                                           & A10  & Registrar fin de la tarea                                                           & Clase    		   \\ \cline{3-5}
+\multirow{3}{*}{E5} & \multirow{3}{*}{Finalización de tarea (F)}                                                           & A10  & Registrar fin de la tarea                                                           & Clase    		   \\ \cline{3-5}
                     &                                                                                                   & A11  & \begin{tabular}[c]{@{}l@{}}Proporcionar el \\ Cuestionario Satisfacción\end{tabular}& \multirow{2}{*}{Aspecto}    \\ \cline{3-4}
-                    &                                                                                                   & A12  & Logging Datos del fin de la tarea                                                   &     			   \\ \hline 
+                    &                                                                                                   & A12  & Logging Datos del fin de la tarea                                                   &     			   \\ \noalign{\hrule height 2pt}
 \end{tabular}
 \end{table}
 \squeezeup
@@ -50,7 +50,7 @@ Los eventos E1 y E3, originados en el dominio (D), permiten identificar, delimit
 \subsection{Diseño e Implementación}
 \label{subsec:disenio_e_implementacion}
 
-En la Figura~\ref{fig:fig3} se presenta el diseño del framework, la implementación está desarrollada en Java y AspectJ. La clase Task constituye el núcleo del framework, dado que mantiene diversas relaciones con los restantes módulos. Los aspectos tienen un rol preponderante, ya que son necesarios para conectar la tarea con la aplicación y para comunicarla con otros servicios del framework (logging). El aspecto TaskConnect conecta a la tarea con los correspondientes eventos de inicio y finalización y realiza las acciones de crear la instancia de la Task y ordenar su finalización. El aspecto TaskError intercepta los errores que se producen en la ejecución de la tarea creada por TaskConnect y el aspecto TaskSatisfaction facilita un formulario que permite registrar la información subjetiva cuando la tarea ha sido finalizada. El aspecto TaskLog registra el logging de las tareas, cuando estas se crean, finalizan o generan otros eventos, de manera que es dependiente de la tarea y no de la aplicación. 
+En la Figura~\ref{fig:fig3} se presenta el diseño del framework, la implementación está desarrollada en Java y AspectJ. La clase \textit{Task} constituye el núcleo del framework, dado que mantiene diversas relaciones con los restantes módulos. Los aspectos tienen un rol preponderante, ya que son necesarios para conectar la tarea con la aplicación y para comunicarla con otros servicios del framework (logging). El aspecto \textit{TaskConnect} conecta a la tarea con los correspondientes eventos de inicio y finalización y realiza las acciones de crear la instancia de la clase \textit{Task} y ordenar su finalización. El aspecto \textit{TaskError} intercepta los errores que se producen en la ejecución de la tarea creada por \textit{TaskConnect} y el aspecto \textit{TaskSatisfaction} facilita un formulario que permite registrar la información subjetiva cuando la tarea ha sido finalizada. El aspecto \textit{TaskLog} registra el logging de las tareas, cuando estas se crean, finalizan o generan otros eventos, de manera que es dependiente de la tarea y no de la aplicación. 
 \squeezeup
 %insertar fig3
 \begin{figure*}[ht!]
@@ -60,7 +60,7 @@ En la Figura~\ref{fig:fig3} se presenta el diseño del framework, la implementac
 \end{figure*}
 \squeezeup
 
-A continuación se presentan los principales detalles del diseño interno e implementación de los módulos del framework. Cómo se mencionó la clase Task representa una tarea del usuario. Tiene diversos estados que permiten calcular posteriormente métricas o que van acumulando los valores de las mismas. Estos estados son inicializados en su instanciación. El atributo init se inicializa con la hora del sistema y el atributo complete con el valor falso. Estos dos atributos serán posteriormente actualizados por el método finalize (cuando la tarea finaliza) y usados para calcular el tiempo (eficiencia de la tarea) y si se ha completado (efectividad de la tarea). Para cada atributo que permite contabilizar errores como los atributos relacionados a la satisfacción existen métodos que permiten su correcta actualización. 
+A continuación se presentan los principales detalles del diseño interno e implementación de los módulos del framework. Cómo se mencionó la clase \textit{Task} representa una tarea del usuario. Tiene diversos estados que permiten calcular posteriormente métricas o que van acumulando los valores de las mismas. Estos estados son inicializados en su instanciación. El atributo \textit{init} se inicializa con la hora del sistema y el atributo \textit{complete} con el valor falso. Estos dos atributos serán posteriormente actualizados por el método \textit{finalize} (cuando la tarea finaliza) y usados para calcular el tiempo (eficiencia de la tarea) y si se ha completado (efectividad de la tarea). Para cada atributo que permite contabilizar errores como los atributos relacionados a la satisfacción existen métodos que permiten su correcta actualización. 
 \squeezeup
 \begin{verbatim}
 class Task  {
@@ -77,7 +77,7 @@ class Task  {
 \end{verbatim}
 \squeezeup
 
-El aspecto abstracto TaskConnect conecta la tarea con la aplicación. Dos pointcuts abstractos startTask y endTask son necesarios para definir los join-points (clase y método del dominio)  en los cuales comienza y finaliza cada tarea. Estos deberán ser definidos en un aspecto concreto por el desarrollador, que deberá crear un subaspecto por cada tarea de usuario distinta que pretenda evaluar. TaskConnect  tiene por atributo una tarea, (objeto  de tipo Task) que es instanciado por dicho aspecto cuando el pointcut startTask es activado y se ejecuta el aviso asociado, lo cual ocurre antes de que cada tarea inicie. De manera similar, este aspecto ordena la finalización de la tarea cuando luego que se activa el pointcut endTask, por medio del aviso asociado, se invoca al método.  
+El aspecto abstracto \textit{TaskConnect} conecta la tarea con la aplicación. Dos pointcuts abstractos \textit{startTask} y \textit{endTask} son necesarios para definir los join-points (clase y método del dominio)  en los cuales comienza y finaliza cada tarea. Estos deberán ser definidos en un aspecto concreto por el desarrollador, quien deberá crear un subaspecto por cada tarea de usuario distinta que pretenda evaluar. \textit{TaskConnect}  tiene por atributo una tarea, (objeto  de tipo \textit{Task}) que es instanciado por dicho aspecto cuando el pointcut \textit{startTask} es activado y se ejecuta el aviso asociado, lo cual ocurre antes de que cada tarea inicie. De manera similar, este aspecto ordena la finalización de la tarea cuando se invoca al método luego que se activa el pointcut \textit{endTask}, por medio del aviso asociado.  
 \squeezeup
 \begin{verbatim}
 abstract aspect TaskConnect {
@@ -94,7 +94,7 @@ abstract aspect TaskConnect {
 \end{verbatim}
 \squeezeup
 
-El aspecto TaskError tiene por objeto interceptar los errores que se producen durante la ejecución de una tarea y ordenar la actualización de los acumuladores correspondientes de la tarea. El aspecto mantiene una referencia a la tarea instanciada, por medio del pointcut beginning y el atributo monitored\_task. Luego por cada tipo de error que se registra, se define un pointcut y advice. Tal es el caso del pointcut exception, cuyo objetivo es interceptar las excepciones que se producen mientras la tarea se ejecuta. Para ello es necesario especificar varias condiciones, que permiten delimitar al conjunto de excepciones que se producen. Estas restricciones debido a que también son necesarias para la intercepción de otros tipos errores se especifican en forma aislada e individual en los pointcuts condition\_1, condition\_2 y condition\_3. Luego en el pointcut exception se combinan con el descriptor de pointcut más específico, para este caso, handler. El advice asociado, primero actualiza el contador de excepciones de la tarea y luego ordena el log del error, operación que realiza el aspecto TaskLog. 
+El aspecto \textit{TaskError} tiene por objeto interceptar los errores que se producen durante la ejecución de una tarea y ordenar la actualización de los acumuladores correspondientes de la tarea. El aspecto mantiene una referencia a la tarea instanciada, por medio del pointcut \textit{beginning} y el atributo \textit{monitored\_task}. Luego por cada tipo de error que se registra, se define un pointcut y advice. Tal es el caso del pointcut \textit{exception}, cuyo objetivo es interceptar las excepciones que se producen mientras la tarea se ejecuta. Para ello es necesario especificar varias condiciones, que permiten delimitar al conjunto de excepciones que se producen. Estas restricciones debido a que también son necesarias para la intercepción de otros tipos de errores se especifican en forma aislada e individual en los pointcuts \textit{condition\_1}, \textit{condition\_2} y \textit{condition\_3}. Luego en el pointcut \textit{exception} se combinan con el descriptor de pointcut más específico, para este caso, \textit{handler}. El advice asociado, primero actualiza el contador de excepciones de la tarea y luego ordena el log del error, operación que realiza el aspecto \textit{TaskLog}. 
 \squeezeup
 \begin{verbatim}
 aspect TaskError {
@@ -120,7 +120,7 @@ aspect TaskError {
 \end{verbatim}
 \squeezeup
 
-Cuando se produce la finalización de una tarea, (el método finalize de Task es invocado por el aspecto TaskConnect), el aspecto TaskSatisfaction proporciona un cuestionario que permite obtener información subjetiva del usuario relacionada a la dimensión satisfacción. Este formulario es muy simple, permite al usuario elegir un valor entre 1 y 5 para cada una de las 3 preguntas que se muestran en pantalla. 
+Cuando se produce la finalización de una tarea, (el método \textit{finalize} de \textit{Task} es invocado por el aspecto \textit{TaskConnect}), el aspecto \textit{TaskSatisfaction} proporciona un cuestionario que permite obtener información subjetiva del usuario relacionada a la dimensión satisfacción. Este formulario es muy simple, permite al usuario elegir un valor entre 1 y 5 para cada una de las 3 preguntas que se muestran en pantalla. 
 \squeezeup
 \begin{verbatim}
 aspect TaskSatisfaction {
@@ -135,7 +135,7 @@ aspect TaskSatisfaction {
 \end{verbatim}
 \squeezeup
 
-Finalmente el aspecto TaskLog  realiza el logging de la tarea en diversos momentos. Es una aspecto abstracto debido a que el log puede realizarse en diversos formatos (texto / xml / base de datos / consola). Los pointcut están definidos de manera concreta, ya que este aspecto está supeditado por completo a los cambios en la tarea.  
+Finalmente el aspecto \textit{TaskLog}  realiza el logging de la tarea en diversos momentos. Es una aspecto abstracto debido a que el log puede realizarse en diversos formatos (texto / xml / base de datos / consola). Los pointcut están definidos de manera concreta, ya que este aspecto está supeditado por completo a los cambios en la tarea.  
 \squeezeup
 \begin{verbatim}
 abstract aspect TaskLog {
@@ -151,4 +151,4 @@ abstract aspect TaskLog {
 \end{verbatim}
 \squeezeup
 
-El diseño e implementación de los módulos del framework se ha apoyado en distintos patrones de diseño aspectuales~\cite{HS2003}. Por ejemplo, en el caso de TaskConnect se aplicaron los patrones Abstract Pointcut y Template Advice, en TaskError se aplicó el patrón Composite Pointcut y en TaskLog se aplicó el patrón Template Advice.
+El diseño e implementación de los módulos del framework se ha apoyado en distintos patrones de diseño aspectuales~\cite{HS2003}. Por ejemplo, en el caso de \textit{TaskConnect} se aplicaron los patrones Abstract Pointcut y Template Advice, en \textit{TaskError} se aplicó el patrón Composite Pointcut y en \textit{TaskLog} se aplicó el patrón Template Advice.
